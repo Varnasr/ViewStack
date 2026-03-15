@@ -1,13 +1,22 @@
-# 🛣️ Roadmap
+# Roadmap
 
-This document outlines the planned future development for this stack.
+This document outlines the planned future development for ViewStack.
 
-## Planned Enhancements
-- Expand and optimize schemas/queries/APIs/UI components.
-- Integrate advanced features like authentication, search, dynamic dashboards.
-- Improve documentation with visual diagrams and interactive tutorials.
-- Expand multilingual and multi-database support where relevant.
-- Integrate broader OpenStacks ecosystem capabilities.
+## Phase 1: Foundation
+- Choose frontend framework (React or Svelte)
+- Set up project scaffolding with Vite
+- Connect to BridgeStack API endpoints
+- Basic data table view with filtering
+
+## Phase 2: Visualisation
+- Chart components (bar, line, scatter) using D3.js or Chart.js
+- Map visualisations for spatial data using Leaflet
+- Responsive layouts for mobile field use
+
+## Phase 3: Dashboards
+- Interactive dashboard pages for key indicators
+- Drill-down navigation from summary to detail views
+- Export and sharing functionality
 
 ---
 
