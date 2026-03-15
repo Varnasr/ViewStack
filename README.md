@@ -1,72 +1,99 @@
 # ViewStack
 
-**Frontend UI for OpenStacks data visualisation.**
+**React dashboard for exploring Indian development data.**
 
 [![Part of OpenStacks](https://img.shields.io/badge/Part%20of-OpenStacks-blue)](https://openstacks.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Status: Early Stage](https://img.shields.io/badge/Status-Early%20Stage-orange)]()
 
-> The presentation layer for OpenStacks — interactive dashboards and data exploration.
+> The presentation layer for OpenStacks -- interactive dashboards for states, schemes, and development indicators.
 
 ---
 
-## Status
-
-**This repository is in early development.** The architecture and goals are documented below, but the frontend application has not yet been implemented. Contributions are welcome to help build this out.
-
-## Vision
-
-ViewStack will provide the user-facing layer for exploring OpenStacks data:
-
-- **Interactive dashboards** for development sector indicators
-- **Data exploration tools** with filtering and drill-down
-- **Chart and map visualisations** for spatial and temporal data
-- **Responsive design** for field use on mobile devices
-
-### Planned Architecture
+## Architecture
 
 ```
-RootStack (Database) → BridgeStack (API) → ViewStack (Frontend)
+RootStack (PostgreSQL) --> BridgeStack (FastAPI) --> ViewStack (React)
 ```
 
-ViewStack consumes the [BridgeStack](https://github.com/Varnasr/BridgeStack) REST API to display data stored in [RootStack](https://github.com/Varnasr/RootStack).
+ViewStack is a React + Vite application that consumes the [BridgeStack](https://github.com/Varnasr/BridgeStack) REST API to display data stored in [RootStack](https://github.com/Varnasr/RootStack).
 
-### Planned Structure
+## What's Inside
 
 ```
 ViewStack/
 ├── src/
-│   ├── components/     # UI components
-│   ├── pages/          # Page-level views
-│   ├── charts/         # Visualisation components
-│   └── utils/          # Helper functions
+│   ├── api/            # API client for BridgeStack
+│   ├── components/     # Reusable UI components (StatCard, LoadingState)
+│   ├── pages/          # Page views
+│   │   ├── Dashboard   # Summary cards, scheme table, regional breakdown
+│   │   ├── States      # State/UT list with region filter, drill-down to districts
+│   │   ├── Schemes     # Government schemes with sector/level filters
+│   │   ├── SchemeDetail # Budget trend charts, coverage data
+│   │   └── Indicators  # Indicator explorer with state-level bar charts
+│   └── utils/          # Formatting helpers (Indian number system, crores)
 ├── public/             # Static assets
-├── package.json        # Dependencies
-└── vite.config.js      # Build configuration
+├── index.html          # Entry point
+├── package.json        # React 18, React Router, Recharts
+└── vite.config.js      # Dev server with API proxy
 ```
 
-## How to Contribute
+## Features
 
-This is a great repo to contribute to if you have experience with:
-- React, Vue, Svelte, or similar frontend frameworks
-- D3.js, Chart.js, or Leaflet for data visualisation
-- Responsive design for mobile-first applications
-- Accessibility (WCAG) standards
+- **Dashboard** -- Overview of states, schemes, indicators, and sectors
+- **State Explorer** -- Browse 36 states/UTs, filter by region, view districts
+- **Scheme Tracker** -- Filter by sector and level, view budget trends as bar charts
+- **Indicator Explorer** -- Click any indicator to see state-level comparison charts
+- **Responsive** -- Mobile-friendly layout for field use
 
-See the [OpenStacks hub](https://github.com/Varnasr/OpenStacks-for-Change) for ecosystem-wide contribution guidelines.
+## Getting Started
+
+**Prerequisites:** Node.js 18+, BridgeStack running on port 8000.
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server (proxies API calls to localhost:8000)
+npm run dev
+
+# Build for production
+npm run build
+```
+
+The dev server proxies `/api` requests to BridgeStack at `http://localhost:8000`.
+
+## Data
+
+ViewStack displays data from RootStack's India-focused development database:
+
+- **36 states and UTs** with regional classification and census data
+- **22 high-priority districts** across Bihar, Jharkhand, Rajasthan, West Bengal, and more
+- **16 indicators** across health, education, gender, and climate sectors
+- **15 government schemes** with budget allocation and utilization tracking
+- **6 sectors** with hierarchical subsectors
 
 ## How It Connects
 
-| Stack | Role | Link |
-|-------|------|------|
-| [RootStack](https://github.com/Varnasr/RootStack) | Database schemas & seed data | Source of truth |
-| [BridgeStack](https://github.com/Varnasr/BridgeStack) | API backend (FastAPI) | Provides data via REST |
-| **ViewStack** (this repo) | Frontend UI | You are here |
+| Stack | Role |
+|-------|------|
+| [RootStack](https://github.com/Varnasr/RootStack) | PostgreSQL schemas, seed data, analytical queries |
+| [BridgeStack](https://github.com/Varnasr/BridgeStack) | FastAPI REST API (read-only) |
+| **ViewStack** (this repo) | React frontend dashboard |
+
+## Contributing
+
+Areas where contributions are welcome:
+- Map visualisations using Leaflet
+- Additional chart types (sparklines, scatter plots)
+- Accessibility improvements
+- Mobile UI refinements
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) or the [OpenStacks hub](https://github.com/Varnasr/OpenStacks-for-Change).
 
 ## License
 
-MIT — free to use, modify, and share. See [LICENSE](LICENSE).
+MIT -- free to use, modify, and share. See [LICENSE](LICENSE).
 
 ---
 
-**Created by [Varna Sri Raman](https://github.com/Varnasr)** — Development Economist & Social Researcher
+**Created by [Varna Sri Raman](https://github.com/Varnasr)** -- Development Economist & Social Researcher
