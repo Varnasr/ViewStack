@@ -3,3 +3,12 @@ dist/
 .env
 .env.local
 *.log
+
+# Added by git standards propagation
+.DS_Store
+Thumbs.db
+build/
+coverage/
+.vscode/
+.idea/
+*.swp
