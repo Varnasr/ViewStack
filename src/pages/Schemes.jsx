@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../api/client'
 import { LoadingState, ErrorState } from '../components/LoadingState'
+import FilterBar from '../components/FilterBar'
 
 function Schemes() {
   const [schemes, setSchemes] = useState(null)
@@ -11,11 +12,15 @@ function Schemes() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    api.getSectors().then(setSectors).catch(() => {})
+    api
+      .getSectors()
+      .then(setSectors)
+      .catch((e) => setError(e.message))
   }, [])
 
   useEffect(() => {
-    api.getSchemes(sectorFilter || undefined, levelFilter || undefined)
+    api
+      .getSchemes(sectorFilter || undefined, levelFilter || undefined)
       .then(setSchemes)
       .catch((e) => setError(e.message))
   }, [sectorFilter, levelFilter])
@@ -27,31 +32,42 @@ function Schemes() {
     <div>
       <h1 className="page-title">Government Schemes</h1>
 
-      <div className="filter-bar">
-        <select value={sectorFilter} onChange={(e) => setSectorFilter(e.target.value)}>
-          <option value="">All Sectors</option>
-          {sectors.map((s) => (
-            <option key={s.sector_id} value={s.sector_id}>{s.sector_name}</option>
-          ))}
-        </select>
-        <select value={levelFilter} onChange={(e) => setLevelFilter(e.target.value)}>
-          <option value="">All Levels</option>
-          <option value="Central">Central</option>
-          <option value="State">State</option>
-          <option value="Central+State">Central+State</option>
-        </select>
-      </div>
+      <FilterBar
+        filters={[
+          {
+            id: 'sector',
+            label: 'Filter by sector',
+            placeholder: 'All Sectors',
+            value: sectorFilter,
+            onChange: setSectorFilter,
+            options: sectors.map((s) => ({ value: s.sector_id, label: s.sector_name })),
+          },
+          {
+            id: 'level',
+            label: 'Filter by level',
+            placeholder: 'All Levels',
+            value: levelFilter,
+            onChange: setLevelFilter,
+            options: [
+              { value: 'Central', label: 'Central' },
+              { value: 'State', label: 'State' },
+              { value: 'Central+State', label: 'Central+State' },
+            ],
+          },
+        ]}
+      />
 
       <div className="table-wrap">
         <table>
+          <caption className="sr-only">Government schemes</caption>
           <thead>
             <tr>
-              <th>Scheme</th>
-              <th>Ministry</th>
-              <th>Level</th>
-              <th>Since</th>
-              <th>Beneficiaries</th>
-              <th>Status</th>
+              <th scope="col">Scheme</th>
+              <th scope="col">Ministry</th>
+              <th scope="col">Level</th>
+              <th scope="col">Since</th>
+              <th scope="col">Beneficiaries</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -78,9 +94,7 @@ function Schemes() {
           </tbody>
         </table>
       </div>
-      <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: 'var(--gray-500)' }}>
-        {schemes.length} schemes
-      </p>
+      <p className="table-count">{schemes.length} schemes</p>
     </div>
   )
 }

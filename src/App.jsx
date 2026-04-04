@@ -10,18 +10,25 @@ import './App.css'
 function App() {
   return (
     <div className="app">
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <header className="header">
         <div className="header-inner">
-          <NavLink to="/" className="logo">ViewStack</NavLink>
-          <nav className="nav">
-            <NavLink to="/" end>Dashboard</NavLink>
+          <NavLink to="/" className="logo" aria-label="ViewStack home">
+            ViewStack
+          </NavLink>
+          <nav className="nav" aria-label="Main navigation">
+            <NavLink to="/" end>
+              Dashboard
+            </NavLink>
             <NavLink to="/states">States</NavLink>
             <NavLink to="/schemes">Schemes</NavLink>
             <NavLink to="/indicators">Indicators</NavLink>
           </nav>
         </div>
       </header>
-      <main className="main">
+      <main className="main" id="main-content">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/states" element={<States />} />
@@ -31,7 +38,7 @@ function App() {
           <Route path="/indicators" element={<Indicators />} />
         </Routes>
       </main>
-      <footer className="footer">
+      <footer className="footer" role="contentinfo">
         <p>
           Part of <a href="https://openstacks.dev">OpenStacks for Change</a> |{' '}
           <a href="https://github.com/Varnasr/ViewStack">GitHub</a>
