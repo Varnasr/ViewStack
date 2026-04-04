@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../api/client'
 import { LoadingState, ErrorState } from '../components/LoadingState'
+import FilterBar from '../components/FilterBar'
 import { formatNumber } from '../utils/format'
 
 function States() {
@@ -10,7 +11,8 @@ function States() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    api.getStates(region || undefined)
+    api
+      .getStates(region || undefined)
       .then(setStates)
       .catch((e) => setError(e.message))
   }, [region])
@@ -22,24 +24,32 @@ function States() {
     <div>
       <h1 className="page-title">States & Union Territories</h1>
 
-      <div className="filter-bar">
-        <select value={region} onChange={(e) => setRegion(e.target.value)}>
-          <option value="">All Regions</option>
-          {['North', 'South', 'East', 'West', 'Central', 'Northeast'].map((r) => (
-            <option key={r} value={r}>{r}</option>
-          ))}
-        </select>
-      </div>
+      <FilterBar
+        filters={[
+          {
+            id: 'region',
+            label: 'Filter by region',
+            placeholder: 'All Regions',
+            value: region,
+            onChange: setRegion,
+            options: ['North', 'South', 'East', 'West', 'Central', 'Northeast'].map((r) => ({
+              value: r,
+              label: r,
+            })),
+          },
+        ]}
+      />
 
       <div className="table-wrap">
         <table>
+          <caption className="sr-only">States and Union Territories</caption>
           <thead>
             <tr>
-              <th>State / UT</th>
-              <th>Region</th>
-              <th>Type</th>
-              <th>Capital</th>
-              <th>Population (2011)</th>
+              <th scope="col">State / UT</th>
+              <th scope="col">Region</th>
+              <th scope="col">Type</th>
+              <th scope="col">Capital</th>
+              <th scope="col">Population (2011)</th>
             </tr>
           </thead>
           <tbody>
@@ -57,7 +67,7 @@ function States() {
           </tbody>
         </table>
       </div>
-      <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: 'var(--gray-500)' }}>
+      <p className="table-count">
         {states.length} {region ? `in ${region}` : 'total'}
       </p>
     </div>
