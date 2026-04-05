@@ -30,9 +30,7 @@ function SchemeDetail() {
     }))
 
   const latestBudget =
-    scheme.budgets && scheme.budgets.length > 0
-      ? scheme.budgets[scheme.budgets.length - 1]
-      : null
+    scheme.budgets && scheme.budgets.length > 0 ? scheme.budgets[scheme.budgets.length - 1] : null
 
   const utilization =
     latestBudget && latestBudget.allocated_crores && latestBudget.spent_crores

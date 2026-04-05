@@ -207,9 +207,18 @@
   font-weight: 500;
 }
 
-.badge-active { background: #dcfce7; color: #166534; }
-.badge-central { background: #dbeafe; color: #1e40af; }
-.badge-state { background: #fef3c7; color: #92400e; }
+.badge-active {
+  background: #dcfce7;
+  color: #166534;
+}
+.badge-central {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.badge-state {
+  background: #fef3c7;
+  color: #92400e;
+}
 
 .loading {
   text-align: center;

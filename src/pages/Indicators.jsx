@@ -98,7 +98,11 @@ function Indicators() {
                 {selectedIndicator?.indicator_name}
                 {selectedIndicator?.direction && (
                   <span className="chart-direction">
-                    ({selectedIndicator.direction === 'higher_better' ? 'higher is better' : 'lower is better'})
+                    (
+                    {selectedIndicator.direction === 'higher_better'
+                      ? 'higher is better'
+                      : 'lower is better'}
+                    )
                   </span>
                 )}
               </h3>
