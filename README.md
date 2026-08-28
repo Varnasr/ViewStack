@@ -2,7 +2,26 @@
 
 **React dashboard for exploring Indian development data.**
 
+> ## ⚠️ This repository is retired
+>
+> **ViewStack is archived and read-only.** It is no longer maintained and will not
+> receive updates, dependency bumps, or responses to issues. Its npm dependencies are
+> frozen at their 2026 versions and will accumulate advisories over time.
+>
+> ViewStack was the frontend of a RootStack → BridgeStack → ViewStack pipeline.
+> That pipeline carried most of the OpenStacks maintenance cost and the research
+> toolkits never actually depended on it, so all three have been retired together.
+>
+> **Nothing has been deleted.** The code stays public and forkable.
+>
+> **If you came here for interactive Indian development data**, use
+> [How India Lives](https://github.com/Varnasr/how-india-lives) — 205 state-level
+> choropleth maps and 10 visual stories, actively maintained.
+>
+> Full reasoning: the [OpenStacks maintenance policy](https://github.com/Varnasr/OpenStacks-for-Change/blob/main/MAINTENANCE.md).
+
 [![Part of OpenStacks](https://img.shields.io/badge/Part%20of-OpenStacks-blue)](https://openstacks.dev)
+[![Status: Retired](https://img.shields.io/badge/Status-Retired-64748b?style=flat-square)](https://github.com/Varnasr/OpenStacks-for-Change/blob/main/MAINTENANCE.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 > The presentation layer for OpenStacks -- interactive dashboards for states, schemes, and development indicators.
@@ -88,7 +107,7 @@ Areas where contributions are welcome:
 - Accessibility improvements
 - Mobile UI refinements
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) or the [OpenStacks hub](https://github.com/Varnasr/OpenStacks-for-Change).
+See [contributing guidelines](https://github.com/Varnasr/.github/blob/main/CONTRIBUTING.md) or the [OpenStacks hub](https://github.com/Varnasr/OpenStacks-for-Change).
 
 ## License
 
